@@ -14,9 +14,6 @@ $correctPassword = "admin_password";
 $login = $_POST['login'];
 $password = $_POST['password'];
 
-// Check if debug mode is enabled
-$debug = isset($_GET['debug']) ? ($_GET['debug'] === 'true') : false;
-
 // Function to authenticate user against the database
 function authenticateUser($login, $password, $correctUsername, $correctPassword)
 {
@@ -26,18 +23,12 @@ function authenticateUser($login, $password, $correctUsername, $correctPassword)
 }
 
 // Perform authentication
-if ($debug) {
-    // Allow access directly to admin console in debug mode
-    echo "Debug mode is enabled. Access granted to admin console.";
-} else {
-    // Authenticate user against the database
-    $authenticated = authenticateUser($login, $password, $correctUsername, $correctPassword);
+$authenticated = authenticateUser($login, $password, $correctUsername, $correctPassword);
 
-    if ($authenticated) {
-        echo "Login successful. Welcome to the admin console.";
-    } else {
-        echo "Incorrect login or password. Access denied.";
-    }
+if ($authenticated) {
+    echo "Login successful. Welcome to the admin console.";
+} else {
+    echo "Incorrect login or password. Access denied.";
 }
 
 ?>
